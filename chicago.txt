@@ -1,0 +1,41 @@
+<macro name="contributors-short">
+    <names variable="author">
+      <name form="short" and="text" delimiter=", " initialize-with=". "/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+        <names variable="director"/>
+        <text macro="substitute-title"/>
+        <text macro="title"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="interviewer">
+    <names variable="interviewer" delimiter=", ">
+      <label form="verb" prefix=" " text-case="capitalize-first" suffix=" "/>
+      <name and="text" delimiter=", "/>
+    </names>
+  </macro>
+
+ <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <choose>
+          <if variable="issued accessed" match="any">
+            <group delimiter=" ">
+              <text macro="contributors-short"/>
+              <text macro="date-in-text"/>
+            </group>
+          </if>
+          <!---comma before forthcoming and n.d.-->
+          <else>
+            <group delimiter=", ">
+              <text macro="contributors-short"/>
+              <text macro="date-in-text"/>
+            </group>
+          </else>
+        </choose>
+        <text macro="point-locators"/>
+      </group>
+    </layout>
+  </citation>
